@@ -1,0 +1,127 @@
+{
+  "$schema": "./schemas/experts.schema.json",
+  "version": "1.0.0",
+  "experts": {
+    "architect": {
+      "id": "architect",
+      "name": "Architect",
+      "icon": "🏗️",
+      "key": "1",
+      "description": "System design, tradeoffs, technical strategy",
+      "category": "core",
+      "prompt_file": "prompts/architect.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "codex",
+      "modes": ["advisory", "implementation"]
+    },
+    "code-reviewer": {
+      "id": "code-reviewer",
+      "name": "Code Reviewer",
+      "icon": "📝",
+      "key": "2",
+      "description": "Code quality, bugs, maintainability",
+      "category": "core",
+      "prompt_file": "prompts/code-reviewer.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "codex",
+      "modes": ["advisory", "implementation"]
+    },
+    "security-analyst": {
+      "id": "security-analyst",
+      "name": "Security Analyst",
+      "icon": "🔒",
+      "key": "3",
+      "description": "Vulnerabilities, threat modeling, hardening",
+      "category": "core",
+      "prompt_file": "prompts/security-analyst.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "codex",
+      "modes": ["advisory", "implementation"]
+    },
+    "plan-reviewer": {
+      "id": "plan-reviewer",
+      "name": "Plan Reviewer",
+      "icon": "📋",
+      "key": "4",
+      "description": "Plan validation before execution",
+      "category": "core",
+      "prompt_file": "prompts/plan-reviewer.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "codex",
+      "modes": ["advisory"]
+    },
+    "scope-analyst": {
+      "id": "scope-analyst",
+      "name": "Scope Analyst",
+      "icon": "🎯",
+      "key": "5",
+      "description": "Requirements analysis, catching ambiguities",
+      "category": "core",
+      "prompt_file": "prompts/scope-analyst.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "codex",
+      "modes": ["advisory"]
+    },
+    "web-designer": {
+      "id": "web-designer",
+      "name": "Web Designer",
+      "icon": "🎨",
+      "key": "6",
+      "description": "UI/UX design, visual design, design systems",
+      "category": "specialized",
+      "prompt_file": "prompts/web-designer.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "gemini",
+      "modes": ["advisory", "implementation"],
+      "capabilities": ["image-analysis", "url-analysis"]
+    },
+    "website-developer": {
+      "id": "website-developer",
+      "name": "Website Developer",
+      "icon": "🌐",
+      "key": "7",
+      "description": "Full-stack web development, React, Next.js",
+      "category": "specialized",
+      "prompt_file": "prompts/website-developer.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "codex",
+      "modes": ["advisory", "implementation"]
+    },
+    "documentation-expert": {
+      "id": "documentation-expert",
+      "name": "Documentation Expert",
+      "icon": "📚",
+      "key": "8",
+      "description": "Technical docs, API docs, READMEs",
+      "category": "specialized",
+      "prompt_file": "prompts/documentation-expert.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "gemini",
+      "modes": ["advisory", "implementation"]
+    },
+    "rapid-prototyper": {
+      "id": "rapid-prototyper",
+      "name": "Rapid Prototyper",
+      "icon": "⚡",
+      "key": "9",
+      "description": "Fast iterations, quick POCs, scaffolding",
+      "category": "specialized",
+      "prompt_file": "prompts/rapid-prototyper.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "grok",
+      "modes": ["implementation"]
+    },
+    "bug-fixer": {
+      "id": "bug-fixer",
+      "name": "Bug Fixer",
+      "icon": "🐛",
+      "key": "0",
+      "description": "Rapid diagnosis and surgical fixes",
+      "category": "specialized",
+      "prompt_file": "prompts/bug-fixer.md",
+      "providers": ["codex", "gemini", "grok"],
+      "recommended_provider": "grok",
+      "modes": ["implementation"]
+    }
+  }
+}

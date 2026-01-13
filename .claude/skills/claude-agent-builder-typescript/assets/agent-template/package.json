@@ -1,0 +1,23 @@
+{
+  "name": "my-agent",
+  "version": "1.0.0",
+  "description": "Production-ready Claude Agent SDK agent",
+  "main": "agent.ts",
+  "scripts": {
+    "dev": "tsx watch agent.ts",
+    "start": "tsx agent.ts",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "latest",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.2.0"
+  }
+}

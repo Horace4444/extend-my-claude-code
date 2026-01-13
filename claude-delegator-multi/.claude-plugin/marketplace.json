@@ -1,0 +1,36 @@
+{
+  "name": "claude-delegator-multi",
+  "display_name": "Claude Delegator Multi",
+  "tagline": "Delegate to AI experts on Codex, Gemini, or Grok",
+  "description": "Multi-provider AI expert delegation for Claude Code. Delegate complex tasks to 10 specialized experts running on OpenAI Codex, Google Gemini, or xAI Grok. Features manual selection for full control over expert and model choice.",
+  "category": "productivity",
+  "icon": "🎯",
+  "screenshots": [],
+  "features": [
+    "10 specialized AI experts (Architect, Security Analyst, Web Designer, etc.)",
+    "3 AI providers (OpenAI Codex, Google Gemini, xAI Grok)",
+    "Manual expert and model selection for full control",
+    "Cost estimates before each delegation",
+    "Guided setup wizard",
+    "Stateless delegation with full context"
+  ],
+  "pricing": {
+    "type": "free",
+    "note": "Plugin is free. API costs apply based on provider usage."
+  },
+  "requirements": {
+    "node": ">=18.0.0",
+    "providers": {
+      "codex": "OpenAI account with Codex CLI access",
+      "gemini": "Google AI Studio API key",
+      "grok": "xAI Console API key"
+    }
+  },
+  "support": {
+    "documentation": "https://github.com/ad-design/claude-delegator-multi#readme",
+    "issues": "https://github.com/ad-design/claude-delegator-multi/issues"
+  },
+  "changelog": {
+    "1.0.0": "Initial release with multi-provider support"
+  }
+}

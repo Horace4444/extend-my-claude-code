@@ -1,0 +1,101 @@
+{
+  "$schema": "./schemas/providers.schema.json",
+  "version": "1.0.0",
+  "providers": {
+    "codex": {
+      "id": "codex",
+      "name": "OpenAI Codex",
+      "description": "OpenAI's coding-optimized GPT model via Codex CLI",
+      "model": "gpt-5.2-codex",
+      "integration": "native-mcp",
+      "mcp": {
+        "type": "stdio",
+        "command": "codex",
+        "args": ["-m", "gpt-5.2-codex", "mcp-server"]
+      },
+      "pricing": {
+        "input_per_1m": 1.75,
+        "output_per_1m": 14.0,
+        "cached_per_1m": 0.175
+      },
+      "context_window": 400000,
+      "strengths": [
+        "complex-reasoning",
+        "multi-file-implementation",
+        "enterprise-patterns",
+        "deep-analysis"
+      ],
+      "setup": {
+        "install": "npm install -g @openai/codex",
+        "auth": "codex login",
+        "verify": "codex --version"
+      }
+    },
+    "gemini": {
+      "id": "gemini",
+      "name": "Google Gemini",
+      "description": "Google's Gemini 3 Pro with 2M token context",
+      "model": "gemini-2.0-flash",
+      "integration": "direct-api",
+      "mcp": {
+        "type": "stdio",
+        "command": "node",
+        "args": ["${PLUGIN_ROOT}/servers/dist/gemini-server.js"],
+        "env": {
+          "GEMINI_API_KEY": "${GEMINI_API_KEY}",
+          "GEMINI_MODEL": "gemini-2.0-flash"
+        }
+      },
+      "pricing": {
+        "input_per_1m": 2.0,
+        "output_per_1m": 12.0
+      },
+      "context_window": 2000000,
+      "strengths": [
+        "large-context",
+        "multimodal",
+        "image-analysis",
+        "documentation",
+        "codebase-analysis"
+      ],
+      "setup": {
+        "key_url": "https://aistudio.google.com/apikey",
+        "env_var": "GEMINI_API_KEY",
+        "verify": "curl 'https://generativelanguage.googleapis.com/v1/models?key=${GEMINI_API_KEY}'"
+      }
+    },
+    "grok": {
+      "id": "grok",
+      "name": "xAI Grok",
+      "description": "xAI's fast, cost-effective coding model",
+      "model": "grok-3-fast",
+      "integration": "direct-api",
+      "mcp": {
+        "type": "stdio",
+        "command": "node",
+        "args": ["${PLUGIN_ROOT}/servers/dist/grok-server.js"],
+        "env": {
+          "XAI_API_KEY": "${XAI_API_KEY}",
+          "GROK_MODEL": "grok-3-fast"
+        }
+      },
+      "pricing": {
+        "input_per_1m": 0.2,
+        "output_per_1m": 1.5,
+        "cached_per_1m": 0.02
+      },
+      "context_window": 256000,
+      "strengths": [
+        "speed",
+        "cost-effective",
+        "fast-iteration",
+        "reasoning-traces"
+      ],
+      "setup": {
+        "key_url": "https://console.x.ai/",
+        "env_var": "XAI_API_KEY",
+        "verify": "curl 'https://api.x.ai/v1/models' -H 'Authorization: Bearer ${XAI_API_KEY}'"
+      }
+    }
+  }
+}

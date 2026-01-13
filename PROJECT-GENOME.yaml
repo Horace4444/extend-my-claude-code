@@ -1,0 +1,128 @@
+project_name: "Extend My Claude Code"
+last_updated: "2026-01-13T17:00:00Z"
+
+purpose:
+  summary: |
+    A repository to warehouse Claude Code tools that expand capabilities.
+    Contains reusable skills for document generation, AI API integrations,
+    agent building, and a multi-provider AI expert delegation system.
+    Designed to enhance Claude Code workflows with specialized tooling.
+  tech_stack:
+    - TypeScript
+    - Next.js 15
+    - React 19
+    - Tailwind CSS
+    - MCP Servers
+    - Python (scripts)
+
+repo_info:
+  url: "https://github.com/Horace4444/extend-my-claude-code"
+  branches:
+    main: "Production - stable tools and skills"
+  ci_cd: "None configured"
+
+file_structure:
+  tree: |
+    extend-my-claude-code/
+    ├── .claude/                    # Claude Code configuration
+    │   ├── settings.local.json     # Local settings (gitignored)
+    │   └── skills/                 # Reusable Claude skills
+    │       ├── ai-api-integrations/
+    │       ├── claude-agent-builder-typescript/
+    │       ├── make-documents/
+    │       ├── project-genome/
+    │       └── skill-creator/
+    ├── claude-delegator-multi/     # Multi-provider AI delegation system
+    │   ├── .claude-plugin/         # Plugin manifest
+    │   ├── commands/               # Slash commands (delegate, setup, status)
+    │   ├── config/                 # Experts, providers, pricing configs
+    │   ├── frontend/               # Next.js dashboard
+    │   ├── prompts/                # Expert system prompts (10 experts)
+    │   ├── rules/                  # Orchestration rules
+    │   └── servers/                # MCP servers (Codex, Gemini, Grok)
+    └── README.md
+  total_files: 59
+
+architecture:
+  overview: |
+    Modular toolkit architecture with two main components:
+    1. Claude Skills - Self-contained skill packages in .claude/skills/
+    2. Claude Delegator Multi - Plugin system for multi-provider AI delegation
+  patterns:
+    - "Skill-based modularity"
+    - "MCP Server pattern"
+    - "Multi-provider orchestration"
+  diagram: |
+    graph TD
+      A[Claude Code] --> B[Skills]
+      A --> C[Delegator Plugin]
+      B --> D[ai-api-integrations]
+      B --> E[make-documents]
+      B --> F[skill-creator]
+      B --> G[project-genome]
+      B --> H[claude-agent-builder]
+      C --> I[Codex Server]
+      C --> J[Gemini Server]
+      C --> K[Grok Server]
+      C --> L[Frontend Dashboard]
+
+semantic_map:
+  modules:
+    skills:
+      ai-api-integrations:
+        purpose: "Multi-provider AI API guidance"
+        deps: ["OpenAI", "Anthropic", "Google", "xAI", "Supabase", "Clerk"]
+      claude-agent-builder-typescript:
+        purpose: "Build production agents with Claude Agent SDK"
+        deps: ["@anthropic-ai/claude-agent-sdk"]
+      make-documents:
+        purpose: "Generate DOCX, PDF, PPTX, XLSX documents"
+        submodules: ["docx", "pdf", "pptx", "xlsx"]
+      project-genome:
+        purpose: "Generate this bootstrap file"
+        deps: ["pyyaml"]
+      skill-creator:
+        purpose: "Guide for creating new Claude skills"
+    delegator:
+      commands:
+        functions: ["delegate", "setup", "status", "uninstall"]
+      servers:
+        functions: ["codex-server", "gemini-server", "grok-server"]
+        deps: ["mcp-base.ts"]
+      frontend:
+        purpose: "Next.js dashboard for delegation control"
+        deps: ["next", "react", "tailwindcss", "zustand", "dexie"]
+      prompts:
+        experts: ["architect", "bug-fixer", "code-reviewer", "documentation-expert",
+                  "plan-reviewer", "rapid-prototyper", "scope-analyst",
+                  "security-analyst", "web-designer", "website-developer"]
+  flows:
+    skill_execution: "Claude Code -> SKILL.md -> Tool execution"
+    delegation: "delegate command -> provider selection -> expert prompt -> response"
+
+navigation_hints:
+  - "Skills location: .claude/skills/, each has SKILL.md entry point"
+  - "Add new skills: use /skill-creator command"
+  - "Delegator experts: claude-delegator-multi/prompts/*.md"
+  - "MCP servers: claude-delegator-multi/servers/, extend mcp-base.ts"
+  - "Frontend dashboard: claude-delegator-multi/frontend/, Next.js 15 app"
+  - "Expert configs: claude-delegator-multi/config/experts.json"
+  - "Provider pricing: claude-delegator-multi/config/pricing.json"
+
+skills_map:
+  ai-api-integrations: |
+    Multi-provider AI API guidance for OpenAI, Anthropic Claude, Google Gemini,
+    xAI Grok, Supabase (PostgreSQL + pgvector), and Clerk authentication.
+    Covers best practices, pricing, and production patterns.
+  claude-agent-builder-typescript: |
+    Comprehensive guide for building production-ready Claude Agent SDK agents.
+    Covers custom tools, testing, deployment, monitoring, and multi-agent patterns.
+  make-documents: |
+    Document generation skills for DOCX (Word), PDF, PPTX (PowerPoint),
+    and XLSX (Excel) using OOXML schemas and proper formatting.
+  project-genome: |
+    Generates and maintains this PROJECT-GENOME.yaml file for AI agent
+    codebase orientation. Run before reading for freshness.
+  skill-creator: |
+    Guide for creating effective Claude Code skills with proper structure,
+    triggers, and tool integrations.

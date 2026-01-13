@@ -1,0 +1,66 @@
+{
+  "name": "claude-delegator-multi",
+  "version": "1.0.0",
+  "description": "Multi-provider AI expert delegation for Claude Code - delegate tasks to specialized experts on OpenAI Codex, Google Gemini, or xAI Grok",
+  "author": "AD Design",
+  "license": "MIT",
+  "homepage": "https://github.com/ad-design/claude-delegator-multi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ad-design/claude-delegator-multi"
+  },
+  "keywords": [
+    "claude-code",
+    "ai-delegation",
+    "multi-model",
+    "openai",
+    "codex",
+    "gemini",
+    "grok",
+    "mcp",
+    "expert-system"
+  ],
+  "rules": [
+    "rules/orchestration.md",
+    "rules/manual-selection.md",
+    "rules/delegation-format.md",
+    "rules/expert-catalog.md"
+  ],
+  "prompts": [
+    "prompts/architect.md",
+    "prompts/code-reviewer.md",
+    "prompts/security-analyst.md",
+    "prompts/plan-reviewer.md",
+    "prompts/scope-analyst.md",
+    "prompts/web-designer.md",
+    "prompts/website-developer.md",
+    "prompts/documentation-expert.md",
+    "prompts/rapid-prototyper.md",
+    "prompts/bug-fixer.md"
+  ],
+  "commands": [
+    "commands/setup.md",
+    "commands/delegate.md",
+    "commands/status.md",
+    "commands/uninstall.md"
+  ],
+  "config": [
+    "config/providers.json",
+    "config/experts.json",
+    "config/pricing.json"
+  ],
+  "permissions": {
+    "read": true,
+    "write": true,
+    "bash": true,
+    "mcp": true
+  },
+  "dependencies": {
+    "node": ">=18.0.0"
+  },
+  "credits": {
+    "based_on": "claude-delegator by Jarrod Watts",
+    "original_repo": "https://github.com/jarrodwatts/claude-delegator",
+    "note": "Extended with multi-provider support and manual selection"
+  }
+}

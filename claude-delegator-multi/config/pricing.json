@@ -1,0 +1,93 @@
+{
+  "$schema": "./schemas/pricing.schema.json",
+  "version": "1.0.0",
+  "last_updated": "2026-01-12",
+  "currency": "USD",
+  "models": {
+    "gpt-5.2-codex": {
+      "provider": "openai",
+      "display_name": "GPT-5.2 Codex",
+      "input_per_1m": 1.75,
+      "output_per_1m": 14.0,
+      "cached_per_1m": 0.175,
+      "context_window": 400000,
+      "notes": "OpenAI's coding-optimized model"
+    },
+    "gemini-2.0-flash": {
+      "provider": "google",
+      "display_name": "Gemini 2.0 Flash",
+      "input_per_1m": 0.10,
+      "output_per_1m": 0.40,
+      "context_window": 1000000,
+      "notes": "Fast, efficient model with 1M context"
+    },
+    "gemini-2.5-pro": {
+      "provider": "google",
+      "display_name": "Gemini 2.5 Pro",
+      "input_per_1m": 1.25,
+      "output_per_1m": 5.00,
+      "context_window": 1000000,
+      "notes": "Google's advanced reasoning model"
+    },
+    "gemini-3-pro": {
+      "provider": "google",
+      "display_name": "Gemini 3 Pro",
+      "input_per_1m": 2.0,
+      "output_per_1m": 12.0,
+      "context_window": 2000000,
+      "notes": "Largest context window available"
+    },
+    "grok-3-fast": {
+      "provider": "xai",
+      "display_name": "Grok 3 Fast",
+      "input_per_1m": 0.20,
+      "output_per_1m": 1.50,
+      "cached_per_1m": 0.02,
+      "context_window": 256000,
+      "notes": "Best value for coding tasks"
+    },
+    "grok-code-fast-1": {
+      "provider": "xai",
+      "display_name": "Grok Code Fast 1",
+      "input_per_1m": 0.20,
+      "output_per_1m": 1.50,
+      "cached_per_1m": 0.02,
+      "context_window": 256000,
+      "notes": "Coding-optimized Grok model"
+    }
+  },
+  "cost_estimates": {
+    "simple_task": {
+      "description": "Simple questions, small fixes",
+      "input_tokens": 1000,
+      "output_tokens": 2000,
+      "codex": 0.03,
+      "gemini": 0.03,
+      "grok": 0.003
+    },
+    "medium_task": {
+      "description": "Code reviews, feature implementation",
+      "input_tokens": 5000,
+      "output_tokens": 5000,
+      "codex": 0.08,
+      "gemini": 0.07,
+      "grok": 0.008
+    },
+    "complex_task": {
+      "description": "Architecture design, security audits",
+      "input_tokens": 20000,
+      "output_tokens": 10000,
+      "codex": 0.18,
+      "gemini": 0.16,
+      "grok": 0.019
+    },
+    "large_task": {
+      "description": "Full codebase analysis, comprehensive docs",
+      "input_tokens": 50000,
+      "output_tokens": 20000,
+      "codex": 0.37,
+      "gemini": 0.34,
+      "grok": 0.04
+    }
+  }
+}
