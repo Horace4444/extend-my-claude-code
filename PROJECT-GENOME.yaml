@@ -1,5 +1,5 @@
 project_name: "Extend My Claude Code"
-last_updated: "2026-01-13T17:00:00Z"
+last_updated: "2026-01-15T19:30:00Z"
 
 purpose:
   summary: |
@@ -31,6 +31,7 @@ file_structure:
     │       ├── claude-agent-builder-typescript/
     │       ├── make-documents/
     │       ├── project-genome/
+    │       ├── react-best-practices/
     │       └── skill-creator/
     ├── claude-delegator-multi/     # Multi-provider AI delegation system
     │   ├── .claude-plugin/         # Plugin manifest
@@ -41,7 +42,7 @@ file_structure:
     │   ├── rules/                  # Orchestration rules
     │   └── servers/                # MCP servers (Codex, Gemini, Grok)
     └── README.md
-  total_files: 59
+  total_files: 61
 
 architecture:
   overview: |
@@ -61,6 +62,7 @@ architecture:
       B --> F[skill-creator]
       B --> G[project-genome]
       B --> H[claude-agent-builder]
+      B --> I2[react-best-practices]
       C --> I[Codex Server]
       C --> J[Gemini Server]
       C --> K[Grok Server]
@@ -83,6 +85,9 @@ semantic_map:
         deps: ["pyyaml"]
       skill-creator:
         purpose: "Guide for creating new Claude skills"
+      react-best-practices:
+        purpose: "React/Next.js performance optimization from Vercel"
+        deps: ["React", "Next.js"]
     delegator:
       commands:
         functions: ["delegate", "setup", "status", "uninstall"]
@@ -126,3 +131,7 @@ skills_map:
   skill-creator: |
     Guide for creating effective Claude Code skills with proper structure,
     triggers, and tool integrations.
+  react-best-practices: |
+    React and Next.js performance optimization guidelines from Vercel Engineering.
+    45 rules across 8 categories for eliminating waterfalls, bundle optimization,
+    server-side performance, re-render optimization, and more.
