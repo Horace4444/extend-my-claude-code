@@ -1,5 +1,5 @@
 project_name: "Extend My Claude Code"
-last_updated: "2026-01-15T19:30:00Z"
+last_updated: "2026-01-16T08:39:00Z"
 
 purpose:
   summary: |
@@ -32,7 +32,8 @@ file_structure:
     │       ├── make-documents/
     │       ├── project-genome/
     │       ├── react-best-practices/
-    │       └── skill-creator/
+    │       ├── skill-creator/
+    │       └── web-design-guidelines/
     ├── claude-delegator-multi/     # Multi-provider AI delegation system
     │   ├── .claude-plugin/         # Plugin manifest
     │   ├── commands/               # Slash commands (delegate, setup, status)
@@ -42,7 +43,7 @@ file_structure:
     │   ├── rules/                  # Orchestration rules
     │   └── servers/                # MCP servers (Codex, Gemini, Grok)
     └── README.md
-  total_files: 61
+  total_files: 62
 
 architecture:
   overview: |
@@ -63,6 +64,7 @@ architecture:
       B --> G[project-genome]
       B --> H[claude-agent-builder]
       B --> I2[react-best-practices]
+      B --> J2[web-design-guidelines]
       C --> I[Codex Server]
       C --> J[Gemini Server]
       C --> K[Grok Server]
@@ -88,6 +90,9 @@ semantic_map:
       react-best-practices:
         purpose: "React/Next.js performance optimization from Vercel"
         deps: ["React", "Next.js"]
+      web-design-guidelines:
+        purpose: "UI code review for Web Interface Guidelines compliance"
+        deps: []
     delegator:
       commands:
         functions: ["delegate", "setup", "status", "uninstall"]
@@ -135,3 +140,7 @@ skills_map:
     React and Next.js performance optimization guidelines from Vercel Engineering.
     45 rules across 8 categories for eliminating waterfalls, bundle optimization,
     server-side performance, re-render optimization, and more.
+  web-design-guidelines: |
+    Review UI code for Web Interface Guidelines compliance. Fetches latest
+    guidelines from Vercel's source and checks accessibility, UX, and design
+    best practices. Outputs findings in terse file:line format.

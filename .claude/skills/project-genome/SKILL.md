@@ -63,9 +63,7 @@ purpose:
   tech_stack: ["React", "Node.js", "PostgreSQL"]
 
 repo_info:
-  url: "https://github.com/org/project"
   branches: {main: "Production", dev: "Development"}
-  ci_cd: "GitHub Actions"
 
 file_structure:
   tree: |
@@ -102,6 +100,8 @@ skills_map:
   lead-research-assistant: "Sales lead research"
   skill-creator: "Create new Claude skills"
   project-genome: "This file - codebase bootstrap"
+
+recent_changes: "Auto-generated from last 5 git commits, synthesized for context"
 ```
 
 ## Generate Genome
@@ -174,7 +174,7 @@ CLAUDE.md should always reference PROJECT-GENOME.yaml at the top:
 | semantic_map | 600-1200 | All major modules, key functions, dependencies |
 | navigation_hints | 100-200 | 5-10 actionable prompts with file paths |
 | skills_map | 200-400 | All skills with detailed descriptions |
-| **Total** | **<4500** | Leave headroom for YAML syntax |
+| **Total** | **<5000** | Leave headroom for YAML syntax |
 
 ## Anti-Patterns
 

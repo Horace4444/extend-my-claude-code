@@ -159,6 +159,73 @@ def build_semantic_map(root_dir: Path) -> dict:
     return semantic
 
 
+def get_recent_changes(root_dir: Path, num_commits: int = 5) -> str:
+    """
+    Extract and synthesize recent git commits into a concise summary.
+
+    Args:
+        root_dir: Repository root directory
+        num_commits: Number of recent commits to analyze (default: 5)
+
+    Returns:
+        Synthesized summary of recent changes
+    """
+    try:
+        # Get recent commit messages
+        result = subprocess.run(
+            ["git", "log", f"-{num_commits}", "--pretty=format:%s"],
+            cwd=root_dir,
+            capture_output=True,
+            text=True,
+            check=True
+        )
+
+        commits = result.stdout.strip().split('\n')
+        if not commits or commits == ['']:
+            return "No recent commits"
+
+        # Synthesize into categories
+        categories = {
+            "features": [],
+            "fixes": [],
+            "updates": [],
+            "refactors": [],
+            "other": []
+        }
+
+        for commit in commits:
+            commit_lower = commit.lower()
+            if any(word in commit_lower for word in ["add", "implement", "create", "new"]):
+                categories["features"].append(commit)
+            elif any(word in commit_lower for word in ["fix", "resolve", "correct"]):
+                categories["fixes"].append(commit)
+            elif any(word in commit_lower for word in ["update", "upgrade", "improve"]):
+                categories["updates"].append(commit)
+            elif any(word in commit_lower for word in ["refactor", "reorganize", "restructure"]):
+                categories["refactors"].append(commit)
+            else:
+                categories["other"].append(commit)
+
+        # Build concise summary
+        summary_parts = []
+
+        if categories["features"]:
+            summary_parts.append(f"Features: {', '.join(categories['features'][:3])}")
+        if categories["fixes"]:
+            summary_parts.append(f"Fixes: {', '.join(categories['fixes'][:2])}")
+        if categories["updates"]:
+            summary_parts.append(f"Updates: {', '.join(categories['updates'][:2])}")
+        if categories["refactors"]:
+            summary_parts.append(f"Refactors: {', '.join(categories['refactors'][:2])}")
+        if categories["other"] and len(summary_parts) < 3:
+            summary_parts.append(f"Other: {', '.join(categories['other'][:2])}")
+
+        return " | ".join(summary_parts) if summary_parts else commits[0]
+
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return "Git history unavailable"
+
+
 def load_existing_genome(genome_path: Path) -> dict | None:
     """Load existing genome file if it exists."""
     if not genome_path.exists():
@@ -179,8 +246,7 @@ def merge_genome(existing: dict | None, updates: dict) -> dict:
     preserve_keys = [
         "purpose",
         "architecture",
-        "navigation_hints",
-        "key_decisions"
+        "navigation_hints"
     ]
 
     merged = updates.copy()
@@ -201,6 +267,7 @@ def generate_genome(root_dir: Path, force_new: bool = False) -> dict:
     tree_output, total_files = generate_file_tree(root_dir)
     skills_map = discover_skills(root_dir / ".claude" / "skills")
     semantic_map = build_semantic_map(root_dir)
+    recent_changes = get_recent_changes(root_dir, num_commits=5)
 
     # Build new genome
     new_genome = {
@@ -213,9 +280,7 @@ def generate_genome(root_dir: Path, force_new: bool = False) -> dict:
         },
 
         "repo_info": {
-            "url": "TODO: Repository URL",
-            "branches": {"main": "Production"},
-            "ci_cd": "TODO: CI/CD system"
+            "branches": {"main": "Production"}
         },
 
         "file_structure": {
@@ -237,7 +302,7 @@ def generate_genome(root_dir: Path, force_new: bool = False) -> dict:
 
         "skills_map": skills_map,
 
-        "key_decisions": []
+        "recent_changes": recent_changes
     }
 
     # Merge with existing to preserve manual edits

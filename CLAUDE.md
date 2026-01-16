@@ -72,6 +72,7 @@ Claude Code
 | project-genome | Generate/update PROJECT-GENOME.yaml | Codebase orientation |
 | react-best-practices | React/Next.js performance optimization (45 rules from Vercel) | React component writing, reviewing, refactoring |
 | skill-creator | Create new Claude Code skills | Skill development |
+| web-design-guidelines | UI code review for Web Interface Guidelines compliance | "review my UI", "check accessibility", "audit design" |
 
 ## Delegator Experts
 

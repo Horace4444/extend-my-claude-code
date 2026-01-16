@@ -24,6 +24,7 @@ The goal is to reduce duplication across projects. Instead of rebuilding the sam
 | **project-genome** | Generate PROJECT-GENOME.yaml for codebase orientation |
 | **react-best-practices** | React/Next.js performance optimization (45 rules from Vercel Engineering) |
 | **skill-creator** | Guide for creating new Claude Code skills |
+| **web-design-guidelines** | UI code review for Web Interface Guidelines compliance (accessibility, UX) |
 
 ### Claude Delegator Multi (`claude-delegator-multi/`)
 
@@ -121,7 +122,8 @@ extend-my-claude-code/
 │       ├── make-documents/
 │       ├── project-genome/
 │       ├── react-best-practices/
-│       └── skill-creator/
+│       ├── skill-creator/
+│       └── web-design-guidelines/
 ├── claude-delegator-multi/     # Multi-provider delegation plugin
 │   ├── commands/               # Slash commands
 │   ├── config/                 # Expert/provider configs
