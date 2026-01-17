@@ -68,6 +68,7 @@ Claude Code
 |-------|---------|---------|
 | ai-api-integrations | Multi-provider AI API guidance (OpenAI, Anthropic, Google, xAI, Supabase, Clerk) | AI API integration tasks |
 | claude-agent-builder-typescript | Build production Claude Agent SDK agents | Agent SDK development |
+| image-converter | Convert, resize, compress images (HEIC, PNG, JPEG, WebP, etc.) | Image manipulation, format conversion, batch processing |
 | make-documents | Generate DOCX, PDF, PPTX, XLSX files | Document creation/editing |
 | project-genome | Generate/update PROJECT-GENOME.yaml | Codebase orientation |
 | react-best-practices | React/Next.js performance optimization (45 rules from Vercel) | React component writing, reviewing, refactoring |

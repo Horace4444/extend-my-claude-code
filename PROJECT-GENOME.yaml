@@ -1,5 +1,5 @@
 project_name: "Extend My Claude Code"
-last_updated: "2026-01-16T08:39:00Z"
+last_updated: "2026-01-17T08:19:00Z"
 
 purpose:
   summary: |
@@ -29,6 +29,7 @@ file_structure:
     │   └── skills/                 # Reusable Claude skills
     │       ├── ai-api-integrations/
     │       ├── claude-agent-builder-typescript/
+    │       ├── image-converter/
     │       ├── make-documents/
     │       ├── project-genome/
     │       ├── react-best-practices/
@@ -43,7 +44,7 @@ file_structure:
     │   ├── rules/                  # Orchestration rules
     │   └── servers/                # MCP servers (Codex, Gemini, Grok)
     └── README.md
-  total_files: 62
+  total_files: 64
 
 architecture:
   overview: |
@@ -65,6 +66,7 @@ architecture:
       B --> H[claude-agent-builder]
       B --> I2[react-best-practices]
       B --> J2[web-design-guidelines]
+      B --> K2[image-converter]
       C --> I[Codex Server]
       C --> J[Gemini Server]
       C --> K[Grok Server]
@@ -79,6 +81,9 @@ semantic_map:
       claude-agent-builder-typescript:
         purpose: "Build production agents with Claude Agent SDK"
         deps: ["@anthropic-ai/claude-agent-sdk"]
+      image-converter:
+        purpose: "Convert, resize, compress images across formats"
+        deps: ["pillow", "pillow-heif"]
       make-documents:
         purpose: "Generate DOCX, PDF, PPTX, XLSX documents"
         submodules: ["docx", "pdf", "pptx", "xlsx"]
@@ -144,3 +149,7 @@ skills_map:
     Review UI code for Web Interface Guidelines compliance. Fetches latest
     guidelines from Vercel's source and checks accessibility, UX, and design
     best practices. Outputs findings in terse file:line format.
+  image-converter: |
+    Convert, resize, compress, and optimize images across formats (HEIC, PNG,
+    JPEG, WebP, AVIF, GIF, TIFF, BMP). Includes batch processing, watermarking,
+    metadata stripping, and web optimization. Uses Python Pillow.

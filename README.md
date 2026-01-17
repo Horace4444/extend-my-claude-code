@@ -20,6 +20,7 @@ The goal is to reduce duplication across projects. Instead of rebuilding the sam
 |-------|-------------|
 | **ai-api-integrations** | Guidance for OpenAI, Anthropic, Google Gemini, xAI Grok, Supabase, and Clerk |
 | **claude-agent-builder-typescript** | Build production agents with Claude Agent SDK |
+| **image-converter** | Convert, resize, compress images (HEIC, PNG, JPEG, WebP, AVIF, GIF, TIFF, BMP) |
 | **make-documents** | Generate DOCX, PDF, PPTX, XLSX files with proper formatting |
 | **project-genome** | Generate PROJECT-GENOME.yaml for codebase orientation |
 | **react-best-practices** | React/Next.js performance optimization (45 rules from Vercel Engineering) |
@@ -119,6 +120,7 @@ extend-my-claude-code/
 │   └── skills/                 # Reusable Claude Code skills
 │       ├── ai-api-integrations/
 │       ├── claude-agent-builder-typescript/
+│       ├── image-converter/
 │       ├── make-documents/
 │       ├── project-genome/
 │       ├── react-best-practices/
