@@ -136,7 +136,8 @@ Total: $0.117
 | "Unknown model" | Run `list-models.ts` to show valid models |
 | "API Error 401" | API key invalid - user needs to verify key |
 | "API Error 429" | Rate limit - wait and retry |
-| "Gemini models require SDK" | Use Imagen models instead for now |
+| "Quota exceeded" | Gemini image generation requires billing-enabled API key (free tier = 0 quota) |
+| "Imagen API is only accessible to billed users" | Enable billing on your Google Cloud project |
 
 ## Advanced: Multiple Images
 

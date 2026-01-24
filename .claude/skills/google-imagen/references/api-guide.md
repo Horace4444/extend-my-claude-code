@@ -38,10 +38,10 @@ GOOGLE_API_KEY=your-api-key-here
 
 ## API Endpoints
 
-### Image Generation
+### Imagen Models (imagen-4.0-*, imagen-3.0-*)
 
 ```
-POST https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateImages
+POST https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:predict
 ```
 
 **Headers:**
@@ -53,11 +53,9 @@ x-goog-api-key: YOUR_API_KEY
 **Body:**
 ```json
 {
-  "prompt": {
-    "text": "image description"
-  },
-  "config": {
-    "numberOfImages": 1
+  "instances": [{ "prompt": "image description" }],
+  "parameters": {
+    "sampleCount": 1
   }
 }
 ```
@@ -65,10 +63,9 @@ x-goog-api-key: YOUR_API_KEY
 **Response:**
 ```json
 {
-  "generatedImages": [
+  "predictions": [
     {
-      "bytesBase64Encoded": "base64...",
-      "mimeType": "image/png"
+      "bytesBase64Encoded": "base64..."
     }
   ]
 }
@@ -76,13 +73,60 @@ x-goog-api-key: YOUR_API_KEY
 
 ---
 
+### Gemini Models (gemini-2.5-flash-image, gemini-3-pro-image-preview)
+
+```
+POST https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent
+```
+
+**Headers:**
+```
+Content-Type: application/json
+x-goog-api-key: YOUR_API_KEY
+```
+
+**Body:**
+```json
+{
+  "contents": [{
+    "parts": [{ "text": "image description" }]
+  }],
+  "generationConfig": {
+    "responseModalities": ["IMAGE", "TEXT"],
+    "responseMimeType": "text/plain"
+  }
+}
+```
+
+**Response:**
+```json
+{
+  "candidates": [{
+    "content": {
+      "parts": [
+        {
+          "inlineData": {
+            "mimeType": "image/png",
+            "data": "base64..."
+          }
+        }
+      ]
+    }
+  }]
+}
+```
+
+**Note:** Gemini image generation requires billing-enabled API key (free tier has 0 quota).
+
+---
+
 ## Usage Patterns
 
-### Basic Generation (TypeScript)
+### Imagen Generation (TypeScript)
 
 ```typescript
 const response = await fetch(
-  `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-fast-generate-001:generateImages`,
+  `https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-fast-generate-001:predict`,
   {
     method: 'POST',
     headers: {
@@ -90,14 +134,42 @@ const response = await fetch(
       'x-goog-api-key': process.env.GOOGLE_API_KEY
     },
     body: JSON.stringify({
-      prompt: { text: "sunset over mountains" },
-      config: { numberOfImages: 1 }
+      instances: [{ prompt: "sunset over mountains" }],
+      parameters: { sampleCount: 1 }
     })
   }
 );
 
 const data = await response.json();
-const imageBase64 = data.generatedImages[0].bytesBase64Encoded;
+const imageBase64 = data.predictions[0].bytesBase64Encoded;
+```
+
+### Gemini Generation (TypeScript)
+
+```typescript
+const response = await fetch(
+  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': process.env.GOOGLE_API_KEY
+    },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: "sunset over mountains" }] }],
+      generationConfig: {
+        responseModalities: ['IMAGE', 'TEXT'],
+        responseMimeType: 'text/plain'
+      }
+    })
+  }
+);
+
+const data = await response.json();
+// Find image in response parts
+const parts = data.candidates[0].content.parts;
+const imagePart = parts.find(p => p.inlineData?.mimeType?.startsWith('image/'));
+const imageBase64 = imagePart.inlineData.data;
 ```
 
 ### Save Image to File

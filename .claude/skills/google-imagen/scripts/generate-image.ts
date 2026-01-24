@@ -56,7 +56,7 @@ const MODEL_PRICING: ModelPricing = {
     endpoint: 'imagen',
     description: 'Highest quality photorealism'
   },
-  // Additional models
+  // Additional Imagen models
   'imagen-4.0-generate-001': {
     name: 'Imagen 4 Standard',
     pricePerImage: 0.040,
@@ -69,12 +69,25 @@ const MODEL_PRICING: ModelPricing = {
     endpoint: 'imagen',
     description: 'Previous generation'
   },
+  // Additional Gemini models
   'gemini-3-pro-image-preview': {
     name: 'Gemini 3 Pro Image',
     pricePerImage: 0.134,
     priceBatch: 0.067,
     endpoint: 'gemini',
     description: 'Professional quality with 4K support'
+  },
+  'gemini-2.0-flash-exp-image-generation': {
+    name: 'Gemini 2.0 Flash Experimental',
+    pricePerImage: 0.039,
+    endpoint: 'gemini',
+    description: 'Experimental image generation'
+  },
+  'gemini-2.0-flash-preview-image-generation': {
+    name: 'Gemini 2.0 Flash Preview',
+    pricePerImage: 0.039,
+    endpoint: 'gemini',
+    description: 'Preview image generation'
   }
 };
 
@@ -122,6 +135,71 @@ async function generateImageWithImagen(
   }
 }
 
+async function generateImageWithGemini(
+  prompt: string,
+  model: string,
+  apiKey: string
+): Promise<{ success: boolean; imageData?: string; error?: string }> {
+  try {
+    // Use the generateContent endpoint with responseModalities set to include image
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ text: prompt }]
+        }],
+        generationConfig: {
+          responseModalities: ['IMAGE', 'TEXT'],
+          responseMimeType: 'text/plain'
+        }
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const errorMessage = errorData.error?.message || response.statusText;
+
+      // Check for quota/billing errors
+      if (response.status === 429 || errorMessage.includes('quota') || errorMessage.includes('limit')) {
+        return {
+          success: false,
+          error: `Quota exceeded: ${errorMessage}. Gemini image generation requires a billing-enabled API key.`
+        };
+      }
+
+      return {
+        success: false,
+        error: `API Error ${response.status}: ${errorMessage}`
+      };
+    }
+
+    const data = await response.json();
+
+    // Extract image from response
+    if (!data.candidates || data.candidates.length === 0) {
+      return { success: false, error: 'No response candidates' };
+    }
+
+    const parts = data.candidates[0].content?.parts || [];
+    for (const part of parts) {
+      if (part.inlineData?.mimeType?.startsWith('image/')) {
+        return { success: true, imageData: part.inlineData.data };
+      }
+    }
+
+    return { success: false, error: 'No image found in response. Model may not support image generation.' };
+
+  } catch (error: any) {
+    return { success: false, error: `Request failed: ${error.message}` };
+  }
+}
+
 async function generateImage(
   prompt: string,
   model: string = 'gemini-2.5-flash-image',
@@ -160,15 +238,8 @@ async function generateImage(
   if (pricing.endpoint === 'imagen') {
     result = await generateImageWithImagen(prompt, model, apiKey);
   } else {
-    // Gemini models not yet implemented in this simple script
-    return {
-      success: false,
-      model,
-      prompt,
-      imagesGenerated: 0,
-      estimatedCost: 0,
-      error: `Gemini image models require the Gemini SDK. Use Imagen models for now, or see references/api-guide.md`
-    };
+    // Use Gemini generateContent API for Gemini image models
+    result = await generateImageWithGemini(prompt, model, apiKey);
   }
 
   if (!result.success) {

@@ -202,13 +202,30 @@
 
 ### Gemini Image Models
 
-**Endpoint:** Use Gemini API with image generation
+**Endpoint:** `https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent`
+
+**Request Format:**
+```json
+{
+  "contents": [{
+    "parts": [{ "text": "your description" }]
+  }],
+  "generationConfig": {
+    "responseModalities": ["IMAGE", "TEXT"],
+    "responseMimeType": "text/plain"
+  }
+}
+```
+
+**Response:** Image is returned as base64 in `candidates[0].content.parts[].inlineData.data`
 
 **Features:**
 - Multi-turn conversations
 - Image editing (not just generation)
 - Reference images (Gemini 3 Pro)
 - Search grounding (Gemini 3 Pro)
+
+**Note:** Gemini image generation requires a billing-enabled API key. Free tier has 0 quota for image generation.
 
 ---
 
