@@ -1,5 +1,5 @@
 ---
-name: google-imagen
+name: google-image-creator
 description: "Generate images using Google AI models (Imagen 4 and Gemini). Presents top 3 model options with pricing, generates images via API, tracks token usage and costs. Use when user needs to: (1) Generate images with Google AI, (2) Choose between Google image models, (3) See pricing for Google image generation, (4) Track image generation costs, or (5) Compare Imagen vs Gemini image models. Self-updating with current pricing from https://ai.google.dev/pricing"
 ---
 
@@ -14,7 +14,7 @@ Generate images using Google's Imagen and Gemini models with automatic cost trac
 When a user wants to generate images, first show them the top 3 options:
 
 ```bash
-npx tsx .claude/skills/google-imagen/scripts/list-models.ts
+npx tsx .claude/skills/google-image-creator/scripts/list-models.ts
 ```
 
 This displays:
@@ -27,7 +27,7 @@ Let the user choose, or recommend Gemini 2.5 Flash for most use cases.
 ### 2. Generate Image
 
 ```bash
-npx tsx .claude/skills/google-imagen/scripts/generate-image.ts \
+npx tsx .claude/skills/google-image-creator/scripts/generate-image.ts \
   "prompt here" \
   "model-id" \
   "./output.png"
@@ -35,7 +35,7 @@ npx tsx .claude/skills/google-imagen/scripts/generate-image.ts \
 
 **Example:**
 ```bash
-npx tsx .claude/skills/google-imagen/scripts/generate-image.ts \
+npx tsx .claude/skills/google-image-creator/scripts/generate-image.ts \
   "sunset over mountains, photorealistic" \
   "gemini-2.5-flash-image" \
   "./sunset.png"
@@ -80,7 +80,7 @@ Get key at: https://aistudio.google.com/app/apikey
 
 2. **Ask Model Preference:** "Which model would you like to use?" Then run:
    ```bash
-   npx tsx .claude/skills/google-imagen/scripts/list-models.ts
+   npx tsx .claude/skills/google-image-creator/scripts/list-models.ts
    ```
 
 3. **User Chooses:** User selects model or you recommend based on needs
@@ -145,7 +145,7 @@ For generating multiple images, run script multiple times and sum costs:
 
 ```bash
 for i in {1..5}; do
-  npx tsx .claude/skills/google-imagen/scripts/generate-image.ts \
+  npx tsx .claude/skills/google-image-creator/scripts/generate-image.ts \
     "landscape $i" \
     "gemini-2.5-flash-image" \
     "./landscape_$i.png"
@@ -191,14 +191,14 @@ echo "Total: 5 images × $0.039 = $0.195"
 **You:**
 "I'll generate a sunset image. Which model would you like?"
 ```
-npx tsx .claude/skills/google-imagen/scripts/list-models.ts
+npx tsx .claude/skills/google-image-creator/scripts/list-models.ts
 ```
 
 **User:** "Use the recommended one"
 
 **You:**
 ```
-npx tsx .claude/skills/google-imagen/scripts/generate-image.ts \
+npx tsx .claude/skills/google-image-creator/scripts/generate-image.ts \
   "beautiful sunset over ocean, warm colors, photorealistic" \
   "gemini-2.5-flash-image" \
   "./sunset.png"
@@ -219,7 +219,7 @@ npx tsx .claude/skills/google-imagen/scripts/generate-image.ts \
 
 **You:**
 ```
-npx tsx .claude/skills/google-imagen/scripts/generate-image.ts \
+npx tsx .claude/skills/google-image-creator/scripts/generate-image.ts \
   "professional product photo of ceramic mug, studio lighting, high detail" \
   "imagen-4.0-ultra-generate-001" \
   "./product.png"
